@@ -1,0 +1,9 @@
+This repository [1] contains all sorts of Igor [2] tests for oVirt Node.
+
+Feel free to suggest more cases and join us at
+  http://www.ovirt.org
+  irc://irc.oftc.net/#ovirt
+
+--
+[1] http://www.gitorious.org/ovirt/ovirt-node-igor-testsuites
+[1] http://www.gitorious.org/ovirt/igord

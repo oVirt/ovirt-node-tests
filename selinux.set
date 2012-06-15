@@ -1,0 +1,6 @@
+#
+# Does some basic selinux checks
+# One testcase per line, this is no script
+#
+
+tcs/selinux-denials.sh

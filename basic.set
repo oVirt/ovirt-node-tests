@@ -1,0 +1,8 @@
+#
+# Does some basic checks
+# One testcase per line, this is no script
+#
+
+tcs/installation_completed.sh   timeout=400
+
+tcs/set_admin_password.sh
