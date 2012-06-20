@@ -5,7 +5,7 @@
 
 lib:libs/common
 
-tcs/installation_completed.sh   timeout=400
+tcs/installation_completed.sh   timeout=900
 
 tcs/set_admin_password.sh
 
