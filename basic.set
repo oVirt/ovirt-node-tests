@@ -3,6 +3,10 @@
 # One testcase per line, this is no script
 #
 
+lib:libs/common
+
 tcs/installation_completed.sh   timeout=400
 
 tcs/set_admin_password.sh
+
+tcs/wait_for_getty.sh

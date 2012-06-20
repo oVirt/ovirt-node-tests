@@ -1,8 +1,10 @@
 #!/bin/bash
 
+. ${IGOR_LIBDIR}/common/common.sh
+
 . /usr/libexec/ovirt-functions
 
-step_succeeded
+igor_step_succeeded
 reboot
 
 # Don't continue, we want to restart

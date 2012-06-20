@@ -3,4 +3,6 @@
 # One testcase per line, this is no script
 #
 
+lib:libs/common
+
 tcs/selinux-denials.sh
