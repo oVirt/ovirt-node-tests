@@ -1,0 +1,8 @@
+#
+# Does some basic TUI checks
+# One testcase per line, this is no script
+#
+
+tcs/wait_for_getty.sh
+
+tcs/uinput_login_as_admin.py
