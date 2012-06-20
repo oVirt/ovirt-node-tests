@@ -9,7 +9,7 @@ import time
 import re
 import random
 
-import common.common as common
+import common
 
 #
 # Import python-uinput
@@ -21,6 +21,7 @@ import uinput
 
 
 logger = logging.getLogger(__name__)
+logger.debug("UINPUTPYDIR: %s" % UINPUTPYDIR)
 
 
 def _all_keys():

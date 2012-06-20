@@ -8,7 +8,7 @@ import logging
 import time
 
 sys.path.append(os.environ["IGOR_LIBDIR"])
-import common.uinput
+import common.input
 
 
 logger = logging.getLogger(__name__)
@@ -26,8 +26,8 @@ login_seq = [
 
 def main():
     logger.debug("Starting login")
-    common.uinput.play(login_seq)
-    on_screen = common.uinput.is_regex_on_screen("Networking:")
+    common.input.play(login_seq)
+    on_screen = common.input.is_regex_on_screen("Networking:")
     lock_exists = os.path.exists("/tmp/ovirt-setup.tty1")
 
     if on_screen and lock_exists:
