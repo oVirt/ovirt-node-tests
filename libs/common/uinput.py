@@ -51,7 +51,7 @@ def press_key(key, delay=12):
     """Simulates a key stroke
     """
     device.emit(key, 1)
-    time.sleep(1.0 / 100 * delay * random.uniform(0.5, 1.5))q
+    time.sleep(1.0 / 100 * delay * random.uniform(0.5, 1.5))
     device.emit(key, 0)
 
 
