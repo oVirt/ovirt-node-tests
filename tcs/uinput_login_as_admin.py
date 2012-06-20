@@ -1,6 +1,6 @@
 #!/bin/env python
 # -*- coding: utf-8 -*
-# vim: set sw=2:
+# vim: set sw=4:
 
 import sys
 import os
@@ -11,21 +11,26 @@ sys.path.append(os.environ["IGOR_LIBDIR"])
 import common.uinput
 
 
-
 logger = logging.getLogger(__name__)
 
 
 login_seq = [
-  # User
-  "admin\n",
-  lambda: time.sleep(0.7),
-  # Password (taken from set admin password)
-  "ovirt\n",
-  lambda: time.sleep(4),
+    # User
+    "admin\n",
+    lambda: time.sleep(0.7),
+    # Password (taken from set admin password)
+    "ovirt\n",
+    lambda: time.sleep(4),
 ]
 
+
+def main():
+    logger.debug("Starting login")
+    common.uinput.play(login_seq)
+    on_screen = common.uinput.is_regex_on_screen("Networking:")
+    lock_exists = os.path.exists("/tmp/ovirt-setup.tty1")
+
+    return on_screen and lock_exists ? 0 else 1
+
 if __name__ == "__main__":
-  logger.debug("Starting login")
-  common.uinput.play(login_seq)
-  common.uinput.is_regex_on_screen("Networking:")
-  sys.exit(main())
+    sys.exit(main())
