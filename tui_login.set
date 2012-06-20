@@ -3,6 +3,8 @@
 # One testcase per line, this is no script
 #
 
+lib:libs/uinput
+
 tcs/wait_for_getty.sh
 
 tcs/uinput_login_as_admin.py
