@@ -1,5 +1,5 @@
 #
-# Does some basic checks
+# Does some stuff after all testcases were run
 # One testcase per line, this is no script
 #
 
@@ -10,5 +10,5 @@ lib:libs/common
 
 
 searchpath:../tcs/
-sleep_600.sh
 
+sleep_60.sh
