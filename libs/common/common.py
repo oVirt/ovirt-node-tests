@@ -29,6 +29,7 @@ def run(cmd, with_retval=False):
   >>> run("echo 0")
   '0'
   """
+  debug("Running: %s" % cmd)
   proc = subprocess.Popen(cmd, shell=True, \
                           stdout=subprocess.PIPE, \
                           stderr=subprocess.PIPE)
@@ -77,10 +78,10 @@ def add_artifact(dst, filename):
                      "not exist") % (dst, filename))
 
   debug("Adding artifact '%s': '%s'" % (dst, filename))
-  url = api_url("job/artifact/for/" + \
-                "{session}/{dst}".format(session=igor.session, \
-                                         dst=dst))
-  run("curl --silent --request PUT --upload-file - " + \
-      "'{url}' <'{filename}'".format(url=url, filename=filename))
+  url = api_url("job/artifact/for/{session}/{dst}".format(
+                                                        session=igor.session, \
+                                                        dst=dst))
+  run("curl --silent --request PUT --upload-file " + \
+      "\"{filename}\" \"{url}\"".format(url=url, filename=filename))
 
 # vim: set sw=2:

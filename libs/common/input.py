@@ -14,6 +14,7 @@ import common
 #
 # Import python-uinput
 #
+common.run("modprobe uinput")
 UINPUTPYDIR = os.path.join(common.igor.libdir, \
                          "uinput/dst/lib64/python2.7/site-packages/")
 sys.path.append(UINPUTPYDIR)
@@ -63,7 +64,7 @@ def send_input(txt):
     for char in txt:
         if char.isupper():
             device.emit(uinput.KEY_LEFTSHIFT, 1)
-        press_key(char_to_key(char.tolower()))
+        press_key(char_to_key(char.lower()))
         if char.isupper():
             device.emit(uinput.KEY_LEFTSHIFT, 0)
 
