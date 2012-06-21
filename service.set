@@ -1,0 +1,8 @@
+#
+# Does some checks on services
+# One testcase per line, this is no script
+#
+
+lib:libs/common
+
+tcs/services_are_running.sh

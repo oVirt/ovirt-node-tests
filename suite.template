@@ -3,6 +3,4 @@
 # On eset per line, this is no script
 #
 
-basic.set
-reboot.set
-services.set
+# On testsuite after another …
