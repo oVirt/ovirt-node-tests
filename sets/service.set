@@ -3,6 +3,10 @@
 # One testcase per line, this is no script
 #
 
+searchpath:../
+
+
 lib:libs/common
+
 
 tcs/services_are_running.sh

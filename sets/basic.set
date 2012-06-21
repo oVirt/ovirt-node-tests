@@ -3,7 +3,11 @@
 # One testcase per line, this is no script
 #
 
+searchpath:../
+
+
 lib:libs/common
+
 
 tcs/installation_completed.sh   timeout=900
 
