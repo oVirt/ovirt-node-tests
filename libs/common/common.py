@@ -3,6 +3,7 @@ import logging
 import time
 import os
 import subprocess
+import urllib2
 
 logger = logging.getLogger(__name__)
 logging.basicConfig( \
@@ -81,7 +82,13 @@ def add_artifact(dst, filename):
   url = api_url("job/artifact/for/{session}/{dst}".format(
                                                         session=igor.session, \
                                                         dst=dst))
-  run("curl --silent --request PUT --upload-file " + \
-      "\"{filename}\" \"{url}\"".format(url=url, filename=filename))
+
+  data = open(filename, "rb").read()
+
+  opener = urllib2.build_opener(urllib2.HTTPHandler)
+  request = urllib2.Request(url, data=data)
+  request.add_header('Content-Type', 'text/plain')
+  request.get_method = lambda: 'PUT'
+  resp = opener.open(request)
 
 # vim: set sw=2:
