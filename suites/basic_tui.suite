@@ -9,3 +9,4 @@ basic.set
 reboot.set
 services.set
 tui_login.set
+after_testing.set

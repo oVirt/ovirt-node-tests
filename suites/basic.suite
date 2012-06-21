@@ -11,3 +11,5 @@ searchpath:../sets/
 basic.set
 reboot.set
 services.set
+
+after_testing.set

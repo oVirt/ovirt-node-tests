@@ -9,4 +9,6 @@ searchpath:../
 lib:libs/common
 
 
-# On testcase after another …
+searchpath:../tcs/
+sleep_600.sh
+
