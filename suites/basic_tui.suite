@@ -7,4 +7,5 @@ searchpath:../sets/
 
 basic.set
 reboot.set
+services.set
 tui_login.set
