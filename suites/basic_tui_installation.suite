@@ -1,0 +1,9 @@
+#
+#
+# On eset per line, this is no script
+#
+
+searchpath:../sets/
+
+tui_installation.set
+after_testing.set

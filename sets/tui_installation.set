@@ -1,0 +1,14 @@
+#
+# A basic TUI installation
+# One testcase per line, this is no script
+#
+
+searchpath:../
+
+
+lib:libs/uinput
+
+
+tcs/wait_for_getty.sh
+
+tcs/uinput_tui_installation.py

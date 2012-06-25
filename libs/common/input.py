@@ -8,6 +8,7 @@ import logging
 import time
 import re
 import random
+import time
 
 import common
 
@@ -127,10 +128,18 @@ def suits_storyboard(story):
     ]
     """
     suits = None
-    for input, output in story:
-        play(input)
+    for input, wait, output in story:
 
-        if callable(output):
+        if input is None:
+            logger.debug("No input to send")
+        else:
+            play(input)
+
+        time.sleep(wait)
+
+        if output is None:
+            logger.debug("No output expected")
+        elif callable(output):
             suits = output(input)
         else:
             suits = is_regex_on_screen(output)
