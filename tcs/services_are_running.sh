@@ -1,15 +1,16 @@
 #!/bin/bash
 
 #
-# DESCRIPTION
+# Services that are expectedt to be running
 #
+
+SERVICES="sshd"
+
 
 COMMONLIB=${IGOR_LIBDIR}/common/common.sh
 [[ -e $COMMONLIB ]] && . $COMMONLIB
 
 FAILED=false
-
-SERVICES="ovirt sshd"
 
 for SERVICE in $SERVICES
 do
