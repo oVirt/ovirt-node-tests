@@ -25,6 +25,19 @@ logger = logging.getLogger(__name__)
 logger.debug("UINPUTPYDIR: %s" % UINPUTPYDIR)
 
 
+class PressedKey(object):
+    key = None
+
+    def __init__(self, k):
+        self.key = k
+
+    def __enter__(self):
+        device.emit(self.key, 1)
+
+    def __exit__(self, type, value, traceback):
+        device.emit(self.key, 0)
+
+
 def _all_keys():
     """Fetches all key related capabilities.
     """
@@ -39,6 +52,9 @@ def char_to_key(char):
     """Maps a character to a key-code
     """
     kmap = {
+        ".": "dot",
+        "-": "minus",
+        "+": "plus",
         " ": "space",
         "\t": "tab",
         "\n": "enter"
@@ -52,9 +68,8 @@ def char_to_key(char):
 def press_key(key, delay=12):
     """Simulates a key stroke
     """
-    device.emit(key, 1)
-    time.sleep(1.0 / 100 * delay * random.uniform(0.5, 1.5))
-    device.emit(key, 0)
+    with PressedKey(key):
+        time.sleep(1.0 / 100 * delay * random.uniform(0.5, 1.5))
 
 
 def send_input(txt):
@@ -63,33 +78,70 @@ def send_input(txt):
     logger.debug("Inputing: %s" % txt)
     for char in txt:
         if char.isupper():
-            device.emit(uinput.KEY_LEFTSHIFT, 1)
-        press_key(char_to_key(char.lower()))
-        if char.isupper():
-            device.emit(uinput.KEY_LEFTSHIFT, 0)
+            with PressedKey(uinput.KEY_LEFTSHIFT):
+                press_key(char_to_key(char.lower()))
+        else:
+            press_key(char_to_key(char.lower()))
 
 
 def play(seq):
-    """Plays a sequence of keystrokes and callables
+    """Plays a sequence of text, single keys and callables
     """
     for item in seq:
         if callable(item):
             item()
-        elif type(item) is str:
+        elif type(item) is tuple:
+            # Expected to be a uinput.KEY_
+            press_key(item)
+        elif type(item) in [str, unicode}:
             send_input(item)
         else:
             logger.warning("Unknown sequence type: %s (%s)" % (type(item), \
                                                                item))
 
 
-def is_regex_on_screen(expr, vcsn=1):
-    """Check if the given expression appears on the screen.
-    """
+def screen_content(vcsn=1):
     vcs = "/dev/vcs%s" % vcsn
     logger.debug("Looking for '%s' on '%s'" % (expr, vcs))
     regex = re.compile(expr)
     # setterm -dump $N
     content = open(vcs, "r").read()
+    return content
+
+
+def is_regex_on_screen(expr, vcsn=1):
+    """Check if the given expression appears on the screen.
+    """
+    content = screen_content(vcsn)
     return regex.search(content) is not None
+
+
+def suits_storyboard(story):
+    """Checks a "storyboard"
+    A storyboard is expected to be in the form of:
+    story = [
+        (input_for_play, output_for_is_regex_on_screen_or_callable),
+        .
+        .
+        .
+    ]
+    """
+    suits = None
+    for input, output in story:
+        play(input)
+
+        if callable(output):
+            suits = output(input)
+        else:
+            suits = is_regex_on_screen(output)
+
+        if suits == False:
+            content = screen_content()
+            raise Exception("Response is not as expected.\n" + \
+                            "Sent: %s\nExpected: %s\nGot: %s" % (input, \
+                                                                 output, \
+                                                                 content))
+
+    return suites
 
 device = uinput.Device(_all_keys())
