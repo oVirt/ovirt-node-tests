@@ -38,8 +38,10 @@ story = [
     ("\t\t\t\n",          4, "Require a password"),
     ("ovirt\tovirt\t",    1, "a weak password"),
 
-    # Start installation
-    ("\t\t\n",          120, "Installation Finished")
+    # P. 6: Start installation
+    ("\t\t\n",          120, "Installation Finished"),
+
+    # P. 7: Reboot
     ("\n", 0, None)
 ]
 
