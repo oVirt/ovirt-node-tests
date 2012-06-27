@@ -175,9 +175,9 @@ class Storyboard(object):
         logger.info("Starting simulated %s" % self.title)
         passed = False
         try:
-            passed = common.input.suits_storyboard(self.story)
+            passed = self.check()
         except Exception as e:
-            logger.warning(e.message)
+            logger.warning("An exception: %s" % e.message)
             passed = False
         logger.info("Finished simulated %s" % self.title)
 
