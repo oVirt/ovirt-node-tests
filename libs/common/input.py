@@ -103,8 +103,7 @@ def play(seq):
 
 def screen_content(vcsn=1):
     vcs = "/dev/vcs%s" % vcsn
-    logger.debug("Looking for '%s' on '%s'" % (expr, vcs))
-    regex = re.compile(expr)
+    logger.debug("Grabbing content from '%s'" % vcs)
     # setterm -dump $N
     content = open(vcs, "r").read()
     return content
@@ -114,6 +113,8 @@ def is_regex_on_screen(expr, vcsn=1):
     """Check if the given expression appears on the screen.
     """
     content = screen_content(vcsn)
+    logger.debug("Looking for '%s' on '%s'" % (expr, vcsn))
+    regex = re.compile(expr)
     return regex.search(content) is not None
 
 
@@ -127,9 +128,11 @@ def suits_storyboard(story):
         .
     ]
     """
-    suits = None
-    for input, wait, output in story:
+    passed = True
+    for storyline in story:
+        logger.info("Testing: %s" % str(storyline))
 
+        input, wait, output = storyline
         if input is None:
             logger.debug("No input to send")
         else:
@@ -140,17 +143,16 @@ def suits_storyboard(story):
         if output is None:
             logger.debug("No output expected")
         elif callable(output):
-            suits = output(input)
+            passed = output(input)
         else:
-            suits = is_regex_on_screen(output)
+            passed = is_regex_on_screen(output)
 
-        if suits == False:
+        if passed == False:
             content = screen_content()
             raise Exception("Response is not as expected.\n" + \
                             "Sent: %s\nExpected: %s\nGot: %s" % (input, \
                                                                  output, \
                                                                  content))
-
-    return suites
+    return passed
 
 device = uinput.Device(_all_keys())
