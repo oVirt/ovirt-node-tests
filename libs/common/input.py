@@ -94,7 +94,7 @@ def play(seq):
         elif type(item) is tuple:
             # Expected to be a uinput.KEY_
             press_key(item)
-        elif type(item) in [str, unicode}:
+        elif type(item) in [str, unicode]:
             send_input(item)
         else:
             logger.warning("Unknown sequence type: %s (%s)" % (type(item), \

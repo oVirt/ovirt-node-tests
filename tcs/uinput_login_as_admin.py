@@ -24,13 +24,14 @@ story = [
     ("ovirt\n",           1, "Networking:")
 ]
 
+
 def main():
     logger.debug("Starting simulated TUI login")
     passed = False
 
     try:
-        passed = suits_storyboard(story):
-    except Exception e:
+        passed = suits_storyboard(story)
+    except Exception as e:
         logger.warning(e.message)
     logger.debug("Finished simulated TUI login")
 
