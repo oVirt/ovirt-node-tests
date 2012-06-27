@@ -25,6 +25,28 @@ import uinput
 logger = logging.getLogger(__name__)
 logger.debug("UINPUTPYDIR: %s" % UINPUTPYDIR)
 
+# Map a char to a key
+charmap = {
+    ".": "dot",
+    "-": "minus",
+    "+": "plus",
+    " ": "space",
+    "\t": "tab",
+    "\n": "enter"
+}
+
+
+def _all_keys():
+    """Fetches all key related capabilities.
+    """
+    keys = []
+    for k in uinput.__dict__:
+        if re.match("^KEY_", k):
+            keys.append(uinput.__dict__[k])
+    return keys
+
+device = uinput.Device(_all_keys())
+
 
 class PressedKey(object):
     key = None
@@ -39,29 +61,11 @@ class PressedKey(object):
         device.emit(self.key, 0)
 
 
-def _all_keys():
-    """Fetches all key related capabilities.
-    """
-    keys = []
-    for k in uinput.__dict__:
-        if re.match("^KEY_", k):
-            keys.append(uinput.__dict__[k])
-    return keys
-
-
 def char_to_key(char):
     """Maps a character to a key-code
     """
-    kmap = {
-        ".": "dot",
-        "-": "minus",
-        "+": "plus",
-        " ": "space",
-        "\t": "tab",
-        "\n": "enter"
-    }
-    if char in kmap:
-        char = kmap[char]
+    if char in charmap:
+        char = charmap[char]
     key_key = "KEY_%s" % char.upper()
     return uinput.__dict__[key_key]
 
@@ -118,43 +122,68 @@ def is_regex_on_screen(expr, vcsn=1):
     return regex.search(content) is not None
 
 
-def suits_storyboard(story):
-    """Checks a "storyboard"
-    A storyboard is expected to be in the form of:
-    story = [
-        (input_for_play, output_for_is_regex_on_screen_or_callable),
-        .
-        .
-        .
-    ]
-    """
-    passed = True
-    for storyline in story:
-        logger.info("Testing: %s" % str(storyline))
+class Storyboard(object):
+    title = None
+    story = None
 
-        input, wait, output = storyline
-        if input is None:
-            logger.debug("No input to send")
-        else:
-            play(input)
+    def __init__(self, title, story):
+        self.title = title
+        self.story = story
 
-        time.sleep(wait)
+    def check(self):
+        """Checks a "storyboard", so if the system behaves as the story tells
+        A storyboard is expected to be in the form of:
+        story = [
+            (input_for_play, output_for_is_regex_on_screen_or_callable),
+            .
+            .
+            .
+        ]
+        """
+        passed = True
+        for storyline in self.story:
+            logger.info("Testing: %s" % str(storyline))
 
-        if output is None:
-            logger.debug("No output expected")
-        elif callable(output):
-            passed = output(input)
-        else:
-            passed = is_regex_on_screen(output)
+            input, wait, output = storyline
+            if input is None:
+                logger.debug("No input to send")
+            else:
+                play(input)
 
-        if passed == False:
-            content = screen_content()
-            raise Exception("Response is not as expected.\n" + \
-                            "Sent: %s\nExpected: %s\nGot: %s" % (input, \
-                                                                 output, \
-                                                                 content))
-    msg = "passed" if passed else "failed"
-    logger.info("Storyboard ended, finished: %s" % msg)
-    return passed
+            time.sleep(wait)
 
-device = uinput.Device(_all_keys())
+            if output is None:
+                logger.debug("No output expected")
+            elif callable(output):
+                passed = output(input)
+            else:
+                passed = is_regex_on_screen(output)
+
+            if passed == False:
+                content = screen_content()
+                raise Exception("Response is not as expected.\n" + \
+                                "Sent: %s\nExpected: %s\nGot: %s" % (input, \
+                                                                     output, \
+                                                                     content))
+        msg = "passed" if passed else "failed"
+        logger.info("Storyboard ended, finished: %s" % msg)
+        return passed
+
+    def run(self):
+        """Run the story and eitehr return 0 on success or 1 on failure
+        """
+        logger.info("Starting simulated %s" % self.title)
+        passed = False
+        try:
+            passed = common.input.suits_storyboard(self.story)
+        except Exception as e:
+            logger.warning(e.message)
+            passed = False
+        logger.info("Finished simulated %s" % self.title)
+
+        return 0 if passed else 1
+
+    def run_and_exit(self):
+        """Run the story and exit
+        """
+        sys.exit(self.run())
