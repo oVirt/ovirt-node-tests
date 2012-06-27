@@ -30,15 +30,16 @@ def main():
     passed = False
 
     try:
-        passed = suits_storyboard(story)
+        passed = common.input.suits_storyboard(story)
     except Exception as e:
         logger.warning(e.message)
+        passed = False
     logger.debug("Finished simulated TUI login")
 
     # Check for the TUI lock
     passed = passed and os.path.exists("/tmp/ovirt-setup.tty1")
 
-    return 1 if passed else 0
+    return 0 if passed else 1
 
 if __name__ == "__main__":
     sys.exit(main())
