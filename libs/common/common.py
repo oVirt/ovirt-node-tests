@@ -4,6 +4,7 @@ import time
 import os
 import subprocess
 import urllib2
+import sys
 
 logger = logging.getLogger(__name__)
 logging.basicConfig( \
