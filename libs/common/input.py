@@ -12,18 +12,18 @@ import time
 
 import common
 
+logger = logging.getLogger(__name__)
+
 #
 # Import python-uinput
 #
-common.run("modprobe uinput")
 UINPUTPYDIR = os.path.join(common.igor.libdir, \
-                         "uinput/dst/lib64/python2.7/site-packages/")
-sys.path.append(UINPUTPYDIR)
+                           "uinput/dst/lib64/python2.7/site-packages/")
+
+common.run("modprobe uinput")
+common.add_searchpath(UINPUTPYDIR)
 import uinput
 
-
-logger = logging.getLogger(__name__)
-logger.debug("UINPUTPYDIR: %s" % UINPUTPYDIR)
 
 # Map a char to a key
 charmap = {

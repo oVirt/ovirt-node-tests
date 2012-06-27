@@ -43,6 +43,10 @@ def run(cmd, with_retval=False):
       r = (proc.returncode, stdout.strip())
   return r
 
+def add_searchpath(p):
+  logger.debug("Adding python searchpath: %s" % p)
+  sys.path.append(p)
+
 def debug_curl(url):
   """Curl a URL
   >>> debug_curl("localhost")
