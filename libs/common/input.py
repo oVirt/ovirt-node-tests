@@ -153,6 +153,8 @@ def suits_storyboard(story):
                             "Sent: %s\nExpected: %s\nGot: %s" % (input, \
                                                                  output, \
                                                                  content))
+    msg = "passed" if passed else "failed"
+    logger.info("Storyboard ended, finished: %s" % msg)
     return passed
 
 device = uinput.Device(_all_keys())
