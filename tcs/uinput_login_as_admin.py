@@ -24,4 +24,4 @@ story = [
 
 
 if __name__ == "__main__":
-    Storyboard("TUI login", story).run_and_exit()
+    common.input.Storyboard("TUI login", story).run_and_exit()
