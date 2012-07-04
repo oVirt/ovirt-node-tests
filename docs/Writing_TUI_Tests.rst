@@ -3,11 +3,14 @@
 Writing TUI tests using common.input
 ====================================
 
+:Authors:
+    Fabian Deutsch <fabiand@fedoraproject.org>
+
 
 What is needed
 --------------
-common.input is a convenience python library for testing the oVirt Node TUI (or any
-other console/terminal based interaction).
+common.input is a convenience python library for testing the oVirt Node TUI (or
+any other console/terminal based interaction).
 
 How to use it
 -------------
@@ -38,5 +41,6 @@ This ``story`` is passed to an Storyboard object and can be run afterwards::
 
 ``run_and_exit()`` is running the story and checks if it behaves like described
 in the story.
-If the story behaves as expected it returns 0 (interpreted as passed by igor)
-or 1 (interpreted as failed by igor) if it doesn't behave well.
+The ``run_and_exit`` returns
+- 0 (interpreted as **passed**) if the story behaves as expected or
+- 1 (interpreted as **failed**) if it does *not* behave as expected.
