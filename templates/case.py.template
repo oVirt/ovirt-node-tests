@@ -5,7 +5,6 @@
 import sys
 import os
 import logging
-import time
 
 sys.path.append(os.environ["IGOR_LIBDIR"])
 import common.input
@@ -26,11 +25,11 @@ def main():
     passed = False
     try:
         passed = suits_storyboard(story):
-    except Exception e:
+    except Exception as e:
         logger.warning(e.message)
     logger.debug("Finished EXAMPLE")
 
-    return 1 if passed else 0
+    return 0 if passed else 1
 
 if __name__ == "__main__":
     sys.exit(main())
