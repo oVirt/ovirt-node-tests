@@ -22,6 +22,17 @@ class Igor(object):
 
 igor = Igor()
 
+def highlight(txt, char='-'):
+  """Surround txt with rules
+
+  >>> highlight("txt")
+  ---
+  txt
+  ---
+  """
+  rule = char * len(txt)
+  return "{rule}\n{txt}\n{rule}".format(rule=rule, txt=txt)
+
 def debug(msg):
   logger.debug(msg) 
 

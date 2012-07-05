@@ -29,7 +29,9 @@ _args = sys.argv[1:]
 cmd = _args[0]
 args = _args[1:]
 func = $PYMODULE.__dict__[cmd]
-print(func(*args))
+r = func(*args)
+if r is not None:
+  print(r)
 EOP
 }
 
