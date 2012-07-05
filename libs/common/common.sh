@@ -7,9 +7,15 @@
 # This way it's possible to call python function "natively" from bash.
 #
 
-WRAPPER_PREFIX=igor_
+# Wrap all top-level functions of the following module:
 PYMODULE=common.common
 
+# Prefix all wrapped functions with this string:
+WRAPPER_PREFIX=igor_
+
+
+# Fetches all callables (top-level functions) from a module
+# These get exported
 _pyc_cmds()
 {
 cat <<EOP | python -
@@ -20,6 +26,7 @@ for f in $PYMODULE.__dict__:
 EOP
 }
 
+# Call the python function $1 with the arguments ($2, $3, …)
 pyc()
 {
 cat <<EOP | python - "$@"
@@ -36,7 +43,7 @@ EOP
 }
 
 
-# We import all common.py functions into bash:
+# Get all top-level callables and create wrapper for them:
 for cmd in $(_pyc_cmds)
 do
   eval "${WRAPPER_PREFIX}$cmd() { pyc $cmd \"\$@\" ; }"
