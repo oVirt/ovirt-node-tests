@@ -11,4 +11,4 @@ lib:libs/common
 
 searchpath:../tcs/
 
-sleep_60.sh
+check_dmesg.sh
