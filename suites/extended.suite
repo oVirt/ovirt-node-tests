@@ -12,5 +12,6 @@ basic.set
 reboot.set
 services.set
 python.set
+tui_login.set
 
 after_testing.set
