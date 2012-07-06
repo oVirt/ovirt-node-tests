@@ -8,6 +8,8 @@ searchpath:../sets/
 basic.set
 reboot.set
 services.set
-tui_login.set
+
+tui/login.set
+tui/check_navigation.set
 
 after_testing.set
