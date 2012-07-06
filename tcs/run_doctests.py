@@ -8,7 +8,8 @@ import logging
 
 import doctest
 
-import common
+sys.path.append(os.environ["IGOR_LIBDIR"])
+import common.common
 
 logger = logging.getLogger(__name__)
 
