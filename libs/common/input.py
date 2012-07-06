@@ -92,6 +92,9 @@ def send_input(txt):
 def play(seq):
     """Plays a sequence of text, single keys and callables
     """
+    if type(seq) is not list:
+        raise Exception("seq is expected to be a list of text, KEY_ " + \
+                        "and callables")
     for item in seq:
         if callable(item):
             item()
@@ -145,6 +148,7 @@ class Storyboard(object):
             logger.info("Testing: %s" % str(storyline))
 
             input, wait, output = storyline
+
             if input is None:
                 logger.debug("No input to send")
             else:

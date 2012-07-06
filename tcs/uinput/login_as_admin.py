@@ -16,10 +16,10 @@ story = [
     (None,                0, "Please login"),
 
     # Enter …, wait … seconds, expect … on screen
-    ("admin\n",           2, "Password:"),
+    (["admin\n"],           2, "Password:"),
 
     # Password (taken from set admin password)
-    ("ovirt\n",           5, "Networking:")
+    (["ovirt\n"],           5, "Networking:")
 ]
 
 

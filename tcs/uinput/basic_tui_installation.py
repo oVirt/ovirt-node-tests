@@ -21,7 +21,7 @@ story = [
 
     # P. 2: Enter keyboard selection
     # Press ENTER, wait 4 seconds, expect "Keyboard …"
-    ("\n",                4, "Keyboard Layout Selection"),
+    (["\n"],                4, "Keyboard Layout Selection"),
 
     # P. 2: Select german keyboard layout
     # Press 53 times UP, wait 0 seconds and expect "German"
@@ -29,20 +29,20 @@ story = [
 
     # P. 3: Enter boot device selection
     # Press ENTER wait 4 seconds and expect "booting …"
-    ("\n",                4, "booting oVirt Node"),
+    (["\n"],                4, "booting oVirt Node"),
 
     # P. 4: Enter installation device selection
-    ("\n",                4, "installation of oVirt Node"),
+    (["\n"],                4, "installation of oVirt Node"),
 
     # P. 5: Enter password dialog
-    ("\t\t\t\n",          4, "Require a password"),
-    ("ovirt\tovirt\t",    1, "a weak password"),
+    (["\t\t\t\n"],          4, "Require a password"),
+    (["ovirt\tovirt\t"],    1, "a weak password"),
 
     # P. 6: Start installation
-    ("\t\t\n",          120, "Installation Finished"),
+    (["\t\t\n"],          120, "Installation Finished"),
 
     # P. 7: Reboot
-    ("\n", 0, None)
+    (["\n"], 0, None)
 ]
 
 def main():

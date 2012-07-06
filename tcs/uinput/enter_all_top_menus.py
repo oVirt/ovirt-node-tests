@@ -32,11 +32,11 @@ keywords = ["System Identification",
 
 # Now press key down, and expext $txt to be on the screen for all keywords
 for txt in keywords:
-    story.append((KEY_DOWN, 2, txt))
+    story.append(([KEY_DOWN], 2, txt))
 
 # Now go back up and don't expect anythiong special (None)
 for txt in keywords:
-    story.append((KEY_UP, 2, None))
+    story.append(([KEY_UP], 2, None))
 
 # At last expect "<Power Off>" to be on the screen again
 story.append((None, 0, "<Power Off>"))
