@@ -19,16 +19,17 @@ story = [
     (None,                0, "<Power Off>"),
 ]
 
-keywords = ["System Identification",
-            "Remote Access",
-            "Keyboard Layout Selection",
-            "Enable SNMP",
-            "Logrotate",
-            "NFS Location",
-            "iSCSI",
-            "CIM Access",
-            "RHEV-M Configuration",
-            "RHN Registration"]
+keywords = ["System Identification",        # Network page
+            "Remote Access",                # Security page
+            "Keyboard Layout Selection",    # Keyboard page
+            "Enable SNMP",                  # SNMP page
+            "Logrotate",                    # Logging page
+            "NFS Location",                 # Kernel Dump page
+            "iSCSI",                        # Remote Storage page
+            "CIM Access",                   # CIM page
+            "Monitoring Configuration",     # Monitoring
+            "Management Server"             # oVirt Engine Page
+        ]
 
 # Now press key down, and expext $txt to be on the screen for all keywords
 for txt in keywords:
