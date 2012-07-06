@@ -3,12 +3,19 @@
 # One testcase per line, this is no script
 #
 
-searchpath:../
+#
+# Libraries
+#
+searchpath:../libs
+
+lib:common
+lib:uinput
 
 
-lib:libs/uinput
+#
+# Testcases
+#
+searchpath:../tcs
 
-
-tcs/wait_for_getty.sh
-
-tcs/uinput_tui_installation.py
+wait_for_getty.sh
+uinput/tui_installation.py

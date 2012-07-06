@@ -16,4 +16,4 @@ lib:common
 #
 searchpath:../tcs
 
-run_doctests.py
+python/run_doctests.py
