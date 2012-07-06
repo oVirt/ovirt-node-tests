@@ -39,7 +39,8 @@ for txt in keywords:
     story.append((KEY_UP, 2, None))
 
 # At last expect "<Power Off>" to be on the screen again
-story.append((None, 0, "<Power Off>")
+story.append((None, 0, "<Power Off>"))
 
 if __name__ == "__main__":
-    common.input.Storyboard("Enter all top menus and go back", story).run_and_exit()
+    common.input.Storyboard("Enter all top menus and go back", \
+                            story).run_and_exit()
