@@ -17,5 +17,5 @@ lib:uinput
 #
 searchpath:../../tcs
 
-wait_for_getty.sh
-uinput/basic_tui_installation.py
+sleep_60.sh                             timeout=70
+uinput/basic_tui_installation.py        timeout=300

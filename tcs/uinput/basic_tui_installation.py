@@ -45,17 +45,6 @@ story = [
     (["\n"], 0, None)
 ]
 
-def main():
-    logger.debug("Starting simulated TUI installation")
-    passed = False
-
-    try:
-        passed = suits_storyboard(story):
-    except Exception e:
-        logger.warning(e.message)
-    logger.debug("Finished simulated TUI installation")
-
-    return 1 if passed else 0
-
 if __name__ == "__main__":
-    sys.exit(main())
+    common.input.Storyboard("Basic TUI installation", \
+                            story).run_and_exit()
