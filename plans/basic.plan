@@ -4,11 +4,5 @@
 
 # Testsuite             Profile         Host                Optional: kargs
 
-# A basic TUI installation
-basic_tui_installation  {tbd_profile}   default-libvirt
-
-# A basic auto installation
+# A basic auto installation without any TUI testing
 basic                   {tbd_profile}   default-libvirt     kargs='storage_init BOOTIF=link'
-
-# A basic auto installation with more testcases
-extended                {tbd_profile}   default-libvirt     kargs='storage_init BOOTIF=link'
