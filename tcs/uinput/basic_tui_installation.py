@@ -38,7 +38,7 @@ story = [
     (["\t\t\t\n"],          4, "Require a password"),
     (["ovirt\tovirt\t"],    2, "a weak password"),
 
-    # P. 6: Start installation
+    # P. 6: Start installation, and give it at most 240 seconds to complete
     (["\t\t\n"],          240, "Installation Finished"),
 
     # P. 7: Reboot
