@@ -8,11 +8,11 @@ import logging
 import time
 
 sys.path.append(os.environ["IGOR_LIBDIR"])
+import common.common
 import common.input
 
 
 logger = logging.getLogger(__name__)
-
 
 story = [
     # P. 1 Welcome
@@ -40,11 +40,21 @@ story = [
 
     # P. 6: Start installation, and give it at most 240 seconds to complete
     (["\t\t\n"],          240, "Installation Finished"),
+]
 
+reboot_seq = [
     # P. 7: Reboot
-    (["\n"],                0, None)
+    ["\n"]
 ]
 
 if __name__ == "__main__":
-    common.input.Storyboard("Basic TUI installation", \
-                            story).run_and_exit()
+    passed = common.input.Storyboard("Basic TUI installation", story).run()
+
+    if passed:
+        common.common.step_succeeded()
+        common.input.play(reboot_seq)
+
+        # Now block (because we are rebooting)
+        time.sleep(60)
+
+    sys.exit(1)

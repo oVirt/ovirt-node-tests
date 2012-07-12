@@ -185,9 +185,9 @@ class Storyboard(object):
             passed = False
         logger.info("Finished simulated %s" % self.title)
 
-        return 0 if passed else 1
+        return passed
 
     def run_and_exit(self):
         """Run the story and exit
         """
-        sys.exit(self.run())
+        sys.exit(0 if self.run() else 1)
