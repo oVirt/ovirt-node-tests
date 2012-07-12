@@ -44,7 +44,7 @@ story = [
 
 reboot_seq = [
     # P. 7: Reboot
-    ["\n"]
+    "\n"
 ]
 
 if __name__ == "__main__":
